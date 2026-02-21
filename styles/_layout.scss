@@ -1,0 +1,20 @@
+.layout {
+  display: grid;
+  gap: 16px;
+  height: 100vh;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 340px 1fr;
+  }
+}
+
+.icon-btn {
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--fg);
+}

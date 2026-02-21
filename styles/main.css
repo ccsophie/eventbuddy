@@ -1,0 +1,448 @@
+@charset "UTF-8";
+:root {
+  --bg: #f5f7fb;
+  --bg-elev: #ffffff;
+  --fg: #111827;
+  --muted: #cfd6e4;
+  --border: #e5e7eb;
+  --primary: #ffb6c1;
+  --bubble-in: #ffffff;
+  --bubble-out: #ffb6c1;
+  --tick-read: #3b82f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --bg-elev: #121a2a;
+    --fg: #e5e7eb;
+    --muted: #2a3550;
+    --border: #1f2937;
+    --primary: #ffb6c1;
+    --bubble-in: #111827;
+    --bubble-out: #ffb6c1;
+    --tick-read: #60a5fa;
+  }
+}
+/* MIXINS LOADED */
+.layout {
+  display: grid;
+  gap: 16px;
+  height: 100vh;
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 340px 1fr;
+  }
+}
+.icon-btn {
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--fg);
+}
+
+.sidebar {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebar__search {
+  padding: 12px 16px;
+}
+
+.sidebar__search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+}
+
+.sidebar__search-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+}
+
+.chatlist {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.chatlist__item {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.chatlist__item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+html[data-theme=dark] .chatlist__item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chatlist__item--active {
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.chatlist__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chatlist__name {
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chatlist__last {
+  font-size: 13px;
+  opacity: 0.7;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chatlist__time {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.chatlist__item--new {
+  background-color: #7fba8e;
+  color: white;
+}
+
+/*
+  Filterbereich oberhalb der Eventliste.
+*/
+.filters {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 10px;
+}
+
+/* Jede Filter-Zeile */
+.filters__row {
+  display: grid;
+  gap: 6px;
+}
+
+/* Label über Select-Feld */
+.filters__label {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Select- und Search-Felder */
+.filters__select,
+.filters__search {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+}
+
+.filters__select:focus,
+.filters__search:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+}
+
+/*
+  Liste aller Events in der Sidebar.
+*/
+.eventlist {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  min-height: 0;
+}
+
+/*
+  Einzelnes Event in der Liste.
+  CSS Grid für flexible Struktur (Titel + Status-Badge).
+*/
+.eventlist__item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* Hover-Effekt für bessere UX */
+.eventlist__item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Dark Mode Anpassung */
+html[data-theme=dark] .eventlist__item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Aktives Event */
+.eventlist__item--active {
+    background: #FFE8EC !important;
+}
+
+
+/* Eventtitel */
+.eventlist__name {
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Zusatzinfo (Datum, Ort kompakt) */
+.eventlist__info {
+  font-size: 13px;
+  opacity: 0.7;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Status-Badge (geplant / abgeschlossen) */
+.eventlist__status {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  align-self: start;
+}
+
+/* Basisbutton */
+.btn {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: inherit;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Deaktivierter Zustand */
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Primäraktion (z.B. Event erstellen) */
+.btn--primary {
+  background: var(--primary);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* Gefährliche Aktion (Löschen) */
+.btn--danger {
+  background: #ef4444;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* Ghost-Button (dezente Aktionen) */
+.btn--ghost:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+html[data-theme=dark] .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/*
+  Hauptcontainer der Detailansicht.
+  Wird als Card dargestellt (gleicher Stil wie Sidebar).
+  Flexbox wird verwendet, um Header + Content vertikal anzuordnen.
+*/
+.event {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  /* Wiederverwendbares Card-Design */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.event__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Container für Titel + Untertitel */
+.event__titlewrap {
+  min-width: 0;
+}
+
+.event__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* verhindert Layout-Bruch bei langen Titeln */
+}
+
+/* Untertitel (z.B. Datum + Ort) */
+.event__subtitle {
+  font-size: 12px;
+  opacity: 0.65;
+  margin-top: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Button-Gruppe im Header */
+.event__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/*
+  Contentbereich der Detailansicht.
+  Hier verwenden ich CSS Grid, um verschiedene Karten
+  nebeneinander darzustellen
+ */
+.event__content {
+  padding: 16px;
+  overflow: auto;
+  display: grid;
+  gap: 12px;
+}
+
+/*
+  Ab Tablet/Desktop wird das Layout zweispaltig.
+  Links Hauptinfos, rechts Tags/Teilnehmer.
+*/
+@media (min-width: 768px) {
+  .event__content {
+    grid-template-columns: 1.3fr 0.7fr;
+    align-items: start;
+  }
+}
+/* Einzelne Informationskarten */
+.event__card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 14px;
+}
+
+/* Informationszeile innerhalb einer Karte */
+.event__row {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.event__row:last-child {
+  border-bottom: 0;
+}
+
+/* Überschrift innerhalb einer Karte */
+.event__h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body.app {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* Scrollbar (optional) */
+.messages::-webkit-scrollbar,
+.chatlist::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages::-webkit-scrollbar-thumb,
+.chatlist::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 999px;
+}
+
+/*# sourceMappingURL=main.css.map */
+
+.header-top {
+    display: flex;
+    flex-direction: column;   /* Titel und +Event untereinander */
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.header-sub {
+    display: flex;            /* Tags, Teilnehmer, Logout in einer Zeile */
+    flex-direction: row;
+    gap: 12px;                /* Abstand zwischen Buttons */
+    margin-top: 8px;
+}
+
+.sidebar__header {
+    display: flow;
+    flex-direction: column;
+}
+

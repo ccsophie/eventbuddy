@@ -1,0 +1,63 @@
+@use 'mixins' as *;
+
+/*
+  Liste aller Events in der Sidebar.
+*/
+.eventlist {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  min-height: 0;
+}
+
+/*
+  Einzelnes Event in der Liste.
+  CSS Grid für flexible Struktur (Titel + Status-Badge).
+*/
+.eventlist__item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* Hover-Effekt für bessere UX */
+.eventlist__item:hover {
+  background: #ffb6c1 !important;
+}
+
+/* Aktives Event */
+.eventlist__item--active {
+  background: #ffb6c1 !important;
+}
+
+/*Dark Mode*/
+html[data-theme="dark"] {
+  --bubble-out: #fbc0cb; /* dein pink im dark mode */
+}
+
+
+/* Eventtitel */
+.eventlist__name {
+  font-weight: 700;
+  @include truncate;
+}
+
+/* Zusatzinfo (Datum, Ort kompakt) */
+.eventlist__info {
+  font-size: 13px;
+  opacity: .7;
+  @include truncate;
+}
+
+/* Status-Badge (geplant / abgeschlossen) */
+.eventlist__status {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  align-self: start;
+}

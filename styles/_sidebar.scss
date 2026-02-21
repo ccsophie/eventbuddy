@@ -1,0 +1,120 @@
+@use './mixins' as *;
+
+.sidebar {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.sidebar__header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-title {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  flex-direction: column;   /* 👈 wichtig */
+  gap: 12px;
+  align-items: flex-start;  /* linksbündig */
+}
+
+.header-top {
+  display: flex;
+  flex-direction: column;   /* Titel und +Event untereinander */
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.header-sub {
+  display: flex;            /* Tags, Teilnehmer, Logout in einer Zeile */
+  flex-direction: row;
+  gap: 12px;                /* Abstand zwischen Buttons */
+  margin-top: 8px;
+}
+
+.sidebar__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebar__search {
+  padding: 12px 16px;
+}
+
+.sidebar__search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+}
+
+.sidebar__search-input:focus {
+  @include ring(#FFB6C1);
+}
+
+.chatlist {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.chatlist__item {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.chatlist__item:hover {
+  background: rgba(0, 0, 0, .03);
+}
+
+html[data-theme='dark'] .chatlist__item:hover {
+  background: rgba(255, 255, 255, .05);
+}
+
+.chatlist__item--active {
+  background: rgba(16, 185, 129, .12);
+}
+
+.chatlist__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chatlist__name {
+  font-weight: 600;
+  @include truncate;
+}
+
+.chatlist__last {
+  font-size: 13px;
+  opacity: .7;
+  @include truncate;
+}
+
+.chatlist__time {
+  font-size: 12px;
+  opacity: .6;
+}
+
+.chatlist__item--new {
+  background-color: #ffb6c1;
+  color: white;
+}

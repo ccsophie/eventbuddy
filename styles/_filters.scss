@@ -1,0 +1,39 @@
+@use './mixins' as *;
+
+/*
+  Filterbereich oberhalb der Eventliste.
+*/
+.filters {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 10px;
+}
+
+/* Jede Filter-Zeile */
+.filters__row {
+  display: grid;
+  gap: 6px;
+}
+
+/* Label über Select-Feld */
+.filters__label {
+  font-size: 12px;
+  opacity: .7;
+}
+
+/* Select- und Search-Felder */
+.filters__select,
+.filters__search {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+}
+
+.filters__select:focus,
+.filters__search:focus {
+  @include ring(#FFB6C1);
+}
