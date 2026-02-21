@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="de" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EventBuddy</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles/main.css" />
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif
+        }
+    </style>
+</head>
+
+<body class="app">
+<div class="layout">
+    <!-- SIDEBAR = Listenansicht + Filter -->
+    <aside class="sidebar">
+        <div class="sidebar__header">
+            <div class="header-top">
+                <h1 class="app-title">EventBuddy</h1>
+                <button class="btn btn--primary" id="btnNewEvent">+ Event</button>
+            </div>
+
+            <div class="header-sub">
+                <button class="btn btn--ghost" id="btnManageTags">Tags</button>
+                <button class="btn btn--ghost" id="btnManageParticipants">TeilnehmerIn</button>
+                <button class="btn btn--ghost" id="btnLogout">Logout</button>
+            </div>
+        </div>
+
+
+
+        <!-- Filter -->
+        <div class="filters">
+            <div class="filters__row">
+                <label class="filters__label" for="filterStatus">Status</label>
+                <select id="filterStatus" class="filters__select">
+                    <option value="all">Alle</option>
+                    <option value="planned">Geplant</option>
+                    <option value="done">Abgeschlossen</option>
+                </select>
+            </div>
+
+            <div class="filters__row">
+                <label class="filters__label" for="filterTag">Tag</label>
+                <select id="filterTag" class="filters__select">
+                    <option value="all">Alle</option>
+                </select>
+            </div>
+
+            <div class="filters__row">
+                <label class="filters__label" for="filterParticipant">TeilnehmerIn</label>
+                <select id="filterParticipant" class="filters__select">
+                    <option value="all">Alle</option>
+                </select>
+            </div>
+
+            <div class="filters__row">
+                <input type="search" id="searchEvents" placeholder="Events suchen…" class="filters__search" />
+            </div>
+        </div>
+
+        <!-- Event Liste -->
+        <ul class="eventlist" id="eventList">
+        </ul>
+        <p id="noResultsMessage" hidden>Keine Events gefunden.</p>
+    </aside>
+
+    <!-- MAIN = Detailansicht -->
+    <main class="event">
+        <header class="event__header">
+            <div class="event__titlewrap">
+                <h2 class="event__title" id="eventTitle">Bitte Event auswählen</h2>
+                <div class="event__subtitle" id="eventSubtitle">—</div>
+            </div>
+
+            <div class="event__actions">
+                <button class="btn btn--ghost" type="button" id="btnEditEvent" disabled>Bearbeiten</button>
+                <button class="btn btn--danger" type="button" id="btnDeleteEvent" disabled>Löschen</button>
+            </div>
+        </header>
+
+        <section class="event__content">
+            <div class="event__card">
+                <div class="event__row"><strong>Datum & Uhrzeit:</strong> <span id="eventDateTime">—</span></div>
+                <div class="event__row"><strong>Ort:</strong> <span id="eventLocation">—</span></div>
+                <div class="event__row"><strong>Status:</strong> <span id="eventStatus">—</span></div>
+                <div class="event__row"><strong>Beschreibung:</strong> <p id="eventDescription">-</p></div>
+            </div>
+
+            <div class="event__card">
+                <h3 class="event__h3">Tags</h3>
+                <div class="chips" id="eventTags">
+                </div>
+            </div>
+
+            <div class="event__card">
+                <h3 class="event__h3">TeilnehmerIn</h3>
+                <ul class="participantlist" id="eventParticipants">
+                </ul>
+                <div class="event__card">
+                    <h3 class="event__h3">Einladungen</h3>
+                    <div id="eventInvites"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal/Drawer Bereiche-->
+        <dialog class="modal" id="eventFormModal"></dialog>
+        <dialog class="modal" id="tagManagerModal"></dialog>
+        <dialog id="participantsModal" class="modal"></dialog>
+        <dialog id="authModal" class="modal"></dialog>
+        <dialog id="tagsModal" class="modal"></dialog>
+
+    </main>
+</div>
+
+<!-- Templates -->
+<template id="eventItemTpl">
+    <li class="eventlist__item" data-event-id="">
+        <div class="eventlist__meta">
+            <div class="eventlist__name"></div>
+            <div class="eventlist__info"></div>
+        </div>
+        <span class="eventlist__status"></span>
+    </li>
+</template>
+
+<template id="chipTpl">
+    <span class="chip" data-id="">
+      <span class="chip__label"></span>
+    </span>
+</template>
+
+<script type="module" src="js/main.js"></script>
+</body>
+
+</html>

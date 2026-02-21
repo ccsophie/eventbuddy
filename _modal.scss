@@ -1,0 +1,33 @@
+/* Dialog-Overlay + Box */
+.modal::backdrop {
+  background: rgba(0,0,0,.35);
+}
+
+.modal {
+  border: 0;
+  padding: 0;
+  border-radius: 16px;
+  max-width: 720px;
+  width: min(720px, calc(100% - 32px));
+}
+
+/* Inhalt */
+.modal__content { padding: 18px; }
+.modal__header { margin-bottom: 12px; }
+.modal__title { margin: 0; font-size: 18px; }
+.modal__body { display: grid; gap: 12px; }
+.modal__footer { display:flex; justify-content:flex-end; gap: 8px; margin-top: 14px; }
+
+/* Form-Felder */
+.field { display: grid; gap: 6px; }
+.field__label { font-size: 13px; opacity: .75; }
+.field__input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-elev);
+}
+
+/* Checkbox-Grid */
+.checkgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.check { display:flex; gap: 8px; align-items:center; }
